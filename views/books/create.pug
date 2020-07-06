@@ -1,0 +1,8 @@
+h2 Create a new book
+form(action="/books/create" method="POST")
+  label(for="title") Title
+  input(type="text" id="title" name="title")
+  br
+  label(for="description") Description
+  input(type="text" id="description" name="description")
+  button Create

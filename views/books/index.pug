@@ -1,0 +1,14 @@
+h2 LIST BOOKS
+a(href="/books/create") Create a new book
+ul
+  each book in books
+    li
+      span Title : 
+      span &nbsp&nbsp&nbsp&nbsp
+      span= book.title
+      span &nbsp&nbsp&nbsp&nbsp
+      a(href="/books/view/" + book.id) View infomation a book
+      span &nbsp&nbsp&nbsp&nbsp
+      a(href="/books/update/" + book.id) Update title
+      span &nbsp&nbsp&nbsp&nbsp
+      a(href="/books/delete/" + book.id) Delete a book
