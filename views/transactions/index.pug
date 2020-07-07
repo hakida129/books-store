@@ -1,0 +1,26 @@
+h2 Transaction
+
+ul 
+  each transaction in transactions
+    li
+      span User Id : 
+      span=transaction.userId
+      br
+      span Book Id : 
+      span=transaction.bookId
+
+form(action="/transactions/create" method="POST")
+
+  h2 New a transaction
+  h4 User
+  select(name= "userId")
+    each user in users
+      option( value = user.id )= user.name
+
+  h4 Book
+  select(name= "bookId")
+    each book in books
+      option( value = book.id )= book.title 
+
+  button Create
+  
