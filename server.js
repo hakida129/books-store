@@ -15,6 +15,8 @@ app.set('view engine', 'pug');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use(express.static('public'))
+
 app.get('/', function(req, res){
   res.render('index');
 });

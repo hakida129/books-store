@@ -1,6 +1,15 @@
-h1 Hello World
-a(href="/books") BOOKS
-span &nbsp&nbsp&nbsp&nbsp
-a(href="/users") USERS
-span &nbsp&nbsp&nbsp&nbsp
-a(href="/transactions") TRANSACTIONS
+extends ./layouts/common
+block content
+
+  nav.navbar.navbar-expand-sm.bg-dark.navbar-dark
+    img(src="/images/logo.png" width="64" height="64")
+    a.navbar-brand(href='#') BOOKS - STORE
+    ul.navbar-nav
+      li.nav-item
+        a.nav-link(href='/books') Books
+      li.nav-item
+        a.nav-link(href='/users') Users
+      li.nav-item
+        a.nav-link(href='/transactions') Transactions
+
+  

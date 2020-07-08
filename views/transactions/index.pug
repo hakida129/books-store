@@ -1,26 +1,34 @@
-h2 Transaction
+extends ../layouts/common
+block content
 
-ul 
-  each transaction in transactions
-    li
-      span User Id : 
-      span=transaction.userId
-      br
-      span Book Id : 
-      span=transaction.bookId
+  h2 Transaction
 
-form(action="/transactions/create" method="POST")
+  ul 
+    each transaction in transactions
+      li
+        span User Id : 
+        span=transaction.userId
+        br
+        span Book Id : 
+        span=transaction.bookId
+        br
+        a(href="/transactions/complete/" + transaction.id ) Hoàn thành
+        br
+        if(transaction.isComplete)
+          span Đã hoàn thành 
 
-  h2 New a transaction
-  h4 User
-  select(name= "userId")
-    each user in users
-      option( value = user.id )= user.name
+  form(action="/transactions/create" method="POST")
 
-  h4 Book
-  select(name= "bookId")
-    each book in books
-      option( value = book.id )= book.title 
+    h2 New a transaction
+    h4 User
+    select(name= "userId")
+      each user in users
+        option( value = user.id )= user.name
 
-  button Create
-  
+    h4 Book
+    select(name= "bookId")
+      each book in books
+        option( value = book.id )= book.title 
+
+    button(class="btn btn-primary") Create
+    
