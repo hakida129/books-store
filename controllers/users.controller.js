@@ -2,6 +2,7 @@
 var shortid = require('shortid');
 
 var db = require('../db');
+const { values } = require('../db');
 
 module.exports.index = function(req, res){
   res.render('users/index',{
@@ -28,6 +29,7 @@ module.exports.delete = function(req, res){
 
 module.exports.postCreate = function(req, res){
   req.body.id = shortid.generate();
+  console.log(res.locals);
   db.get('users').push(req.body).write()
   res.redirect('/users');
 };

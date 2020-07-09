@@ -1,15 +1,21 @@
-h2 Hello users
-a(href="/users/create") New a user
 
-ul
-  each user in users
-    li
-      span Name : 
-      span &nbsp
-      span= user.name
-      span &nbsp
-      a(href="/users/view/" + user.id) View user
-      span &nbsp
-      a(href="/users/update/" + user.id) Update user
-      span &nbsp
-      a(href="/users/delete/" + user.id) Delete user
+extends ../layouts/common
+block content
+
+  h2.text-center.mt-5 List users
+  a.btn.btn-primary(href="/users/create") New a user
+
+
+  table.table
+    tr
+      th Name
+      th Phone
+      th Actions
+    each user in users
+      tr
+        td= user.name
+        td= user.phone
+        td
+          a.btn.btn-primary.ml-3(href="/users/view/" + user.id) View
+          a.btn.btn-primary.ml-3(href="/users/update/" + user.id) Update 
+          a.btn.btn-primary.ml-3(href="/users/delete/" + user.id) Delete 

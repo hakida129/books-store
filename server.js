@@ -5,6 +5,8 @@ var bookRouter = require('./routers/books.router');
 var userRouter = require('./routers/users.router');
 var transactionRouter = require('./routers/transactions.router');
 
+var middleware = require('./middleware/countCookie.middleware');
+
 var app = express();
 
 var PORT = 3000;
@@ -17,13 +19,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static('public'))
 
-app.get('/', function(req, res){
+app.get('/',middleware.countCookie, function(req, res){
   res.render('index');
 });
 
-app.use('/books', bookRouter);
-app.use('/users', userRouter);
-app.use('/transactions', transactionRouter);
+app.use('/books',middleware.countCookie, bookRouter);
+app.use('/users',middleware.countCookie, userRouter);
+app.use('/transactions',middleware.countCookie, transactionRouter);
 
 app.listen(PORT, function(){
   console.log(`Server running at http://localhost:${PORT} `);
