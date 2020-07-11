@@ -3,19 +3,35 @@ block content
 
   h2 Transaction
 
-  ul 
-    each transaction in transactions
-      li
-        span User Id : 
-        span=transaction.userId
-        br
-        span Book Id : 
-        span=transaction.bookId
-        br
-        a(href="/transactions/complete/" + transaction.id ) Hoàn thành
-        br
-        if(transaction.isComplete)
-          span Đã hoàn thành 
+  ul
+    if(user.isAdmin === true)
+      each transaction in transactions
+        li
+          span User Id : 
+          span=transaction.userId
+          br
+          span Book Id : 
+          span=transaction.bookId
+          br
+          a(href="/transactions/complete/" + transaction.id ) Hoàn thành
+          br
+          if(transaction.isComplete)
+            span Đã hoàn thành 
+    else
+      span= user.id
+      each transaction in transactions
+        if(user.id === transaction.userId)
+          li
+          span User Id : 
+          span=transaction.userId
+          br
+          span Book Id : 
+          span=transaction.bookId
+          br
+          a(href="/transactions/complete/" + transaction.id ) Hoàn thành
+          br
+          if(transaction.isComplete)
+            span Đã hoàn thành 
 
   form(action="/transactions/create" method="POST")
 

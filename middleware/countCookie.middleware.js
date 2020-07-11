@@ -1,9 +1,8 @@
 module.exports.countCookie = function(req, res, next){
-  if(res.locals.countCookie){
-    ++countCookie;
+  if(!req.cookies.countCookie){
+    res.cookie('countCookie', 1);
   }else{
-    res.locals.countCookie = 1;
+    res.cookie('countCookie', ++req.cookies.countCookie);
   }
-
   next()
-}
+} 

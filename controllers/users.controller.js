@@ -1,14 +1,15 @@
-
 var shortid = require('shortid');
+var bcrypt = require('bcrypt');
+
+var saltRounds = 10;
 
 var db = require('../db');
-const { values } = require('../db');
 
 module.exports.index = function(req, res){
   res.render('users/index',{
     users : db.get('users').value()
   });
-};
+};  
 
 module.exports.create = function(req, res){
   res.render('users/create');
@@ -28,8 +29,23 @@ module.exports.delete = function(req, res){
 };
 
 module.exports.postCreate = function(req, res){
-  req.body.id = shortid.generate();
-  console.log(res.locals);
-  db.get('users').push(req.body).write()
-  res.redirect('/users');
+  bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
+    req.body.password = hash;
+    var errors = [];
+    req.body.id = shortid.generate();
+    req.body.isAdmin = false;
+    var emailUser = db.get('users').find({ email : req.body.email}).value();
+    if(emailUser){
+      errors.push('Email đã tồn tại')
+      res.render('users/create',{
+        values: req.body,
+        errors: errors
+      });
+      return;
+    }
+    
+    db.get('users').push(req.body).write()
+    res.redirect('/users');
+  });
+ 
 };
