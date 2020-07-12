@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 var express = require('express');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
@@ -19,7 +21,7 @@ app.set('view engine', 'pug');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cookieParser());
+app.use(cookieParser(process.env.SESSION_SECRET));
 
 app.use(express.static('public'))
 

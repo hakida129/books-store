@@ -16,7 +16,5 @@ module.exports.postCreate = function(req, res, next){
     return;
   }
 
-  res.locals.success = true;
-
   next();
 }
