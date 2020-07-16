@@ -6,17 +6,33 @@ html
     nav.navbar.navbar-expand-sm.bg-primary.navbar-dark
       img(src="/images/logo.png" width="64" height="64")
       a.navbar-brand(href='/') BOOKS - STORE
-      ul.navbar-nav
-        li.nav-item
-          a.nav-link(href='/books') Books
-        li.nav-item
-          a.nav-link(href='/users') Users
-        li.nav-item
-          a.nav-link(href='/transactions') Transactions
+        ul.navbar-nav
+          if(!user)
+            li.nav-item
+              a.nav-link(href='/products') Products
+            li.nav-item
+              a.nav-link(href='#') Cart
+              
+          else
+            if(user.isAdmin === true)
+              li.nav-item
+                a.nav-link(href='/books') Books
+              li.nav-item
+                a.nav-link(href='/users') Users
+              li.nav-item
+                a.nav-link(href='/transactions') Transactions
+            else
+              li.nav-item
+                a.nav-link(href='/products') Products
+              li.nav-item
+                a.nav-link(href='/transactions') Transactions
+        ul.navbar-nav.ml-auto
+          if user
+            p= user.name
+          else
+            li.nav-item
+              a.nav-link(href='auth/login') Login
 
-      if user
-        p= user.name
 
     .container
       block content
-      

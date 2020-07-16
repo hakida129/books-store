@@ -1,8 +1,16 @@
-h2 Create a new book
-form(action="/books/create" method="POST")
-  label(for="title") Title
-  input(type="text" id="title" name="title")
-  br
-  label(for="description") Description
-  input(type="text" id="description" name="description")
-  button Create
+extends ../layouts/common
+block content
+
+  h2.mt-5 Create a new book
+  form(action="/books/create" method="POST" enctype="multipart/form-data")
+    .form-group
+      label(for="title") Title
+      input.form-control(type="text" id="title" name="title")
+    .form-group
+      label(for="description") Description
+      input.form-control(type="text" id="description" name="description")
+    .form-group
+      label(for="cover") Cover
+      input.form-control(type="file" id="cover" name="cover")
+
+    button.btn.btn-primary.mt-2 Create

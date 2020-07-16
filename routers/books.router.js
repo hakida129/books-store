@@ -1,8 +1,12 @@
 var express = require('express');
 
+var multer  = require('multer');
+
 var controller = require('../controllers/books.controller');
 
 var router = express.Router();
+
+var upload = multer({ dest: 'public/uploads/' });
 
 router.get('/', controller.index);
 
@@ -16,6 +20,6 @@ router.get('/create', controller.create);
 
 router.post('/update/:id', controller.postUpdate);
 
-router.post('/create', controller.postCreate);
+router.post('/create', upload.single('cover'), controller.postCreate);
 
 module.exports = router;

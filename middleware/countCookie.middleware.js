@@ -4,5 +4,7 @@ module.exports.countCookie = function(req, res, next){
   }else{
     res.cookie('countCookie', ++req.cookies.countCookie);
   }
+
+  
   next()
 } 

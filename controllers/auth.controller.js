@@ -63,5 +63,9 @@ module.exports.postLogin = async function(req, res){
   res.cookie('userId', user.id,{
     signed: true
   });
-  res.redirect('/books'); 
+  if(user.isAdmin === true){
+    res.redirect('/users');
+  }
+  else
+    res.redirect('/transactions');
 };

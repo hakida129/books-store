@@ -1,0 +1,19 @@
+
+extends ../layouts/common
+block content
+
+
+  h2.mt-5.text-center LIST BOOKS
+
+  .container
+    .row
+      each product in products
+        .col-3
+          .card
+          img.card-img-top(src=product.coverUrl)
+          .card-body
+            h5.card-title= product.title
+            p.card-text= product.description
+            a.btn.btn-primary(href='#') Add to card
+
+  

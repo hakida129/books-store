@@ -8,9 +8,11 @@ var bookRouter = require('./routers/books.router');
 var userRouter = require('./routers/users.router');
 var transactionRouter = require('./routers/transactions.router');
 var authRouter = require('./routers/auth.router');
+var productRouter = require('./routers/products.router');
 
 var middleware = require('./middleware/countCookie.middleware');
 var middlewareAuth = require('./middleware/auth.middleware');
+var middlewareSession = require('./middleware/sessions.middleware');
 
 var app = express();
 
@@ -22,6 +24,7 @@ app.set('view engine', 'pug');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser(process.env.SESSION_SECRET));
+app.use(middlewareSession);
 
 app.use(express.static('public'))
 
@@ -33,7 +36,8 @@ app.get('/',middleware.countCookie, function(req, res){
 app.use('/books', middlewareAuth.requireAuth, middleware.countCookie, bookRouter);
 app.use('/users', middlewareAuth.requireAuth, middleware.countCookie, userRouter);
 app.use('/transactions', middlewareAuth.requireAuth, middleware.countCookie, transactionRouter);
-app.use('/auth', authRouter);
+app.use('/auth', middleware.countCookie, authRouter);
+app.use('/products', productRouter);
 
 app.listen(PORT, function(){
   console.log(`Server running at http://localhost:${PORT} `);
